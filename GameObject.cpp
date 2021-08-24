@@ -1,9 +1,21 @@
 #include "GameObject.h"
-#include <vector>
+
 #include <iostream>
 
-std::vector<Component*> Components;
 
+
+
+GameObject::GameObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) {
+	GameObject::Position = position;
+	GameObject::Rotation = rotation;
+	GameObject::Scale = scale;
+}
+
+GameObject::GameObject() {
+	GameObject::Position = glm::vec3(0.0f,0.0f,0.0f);
+	GameObject::Rotation = glm::vec3(0.0f,0.0f,0.0f);
+	GameObject::Scale = glm::vec3(1.0f,1.0f,1.0f);
+}
 
 void GameObject::addComponent(Component* c) {
 	for (Component* comp : Components) {
@@ -13,8 +25,9 @@ void GameObject::addComponent(Component* c) {
 			return;
 		}
 	}
-
+	c->setGameObject((void*) this);
 	Components.push_back(c);
+
 }
 
 void GameObject::Init() {

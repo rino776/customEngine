@@ -238,12 +238,16 @@ std::vector<Mesh::Vertex> vertices;
 std::vector<unsigned int> indices;
 
 Mesh* testMesh;
+Mesh* testMesh2;
 
 GameObject Test;
+GameObject Test2;
 
 
 
 void Game::init() {
+
+	Test = GameObject(glm::vec3(1.0,1.0,1.0),glm::vec3(0.0, 0.0, 0.0), glm::vec3(1.0, 1.0, 1.0));
 
 	unsigned int index = 0;
 	int UV = 0;
@@ -263,12 +267,15 @@ void Game::init() {
 	Texture* tex = Texture::loadTexture("default.png");
 
 	testMesh = new Mesh(vertices, indices, tex);
+	testMesh2 = new Mesh(vertices, indices, tex);
 
 	lastMouse = Input::getMousePos();
 
 	Test.addComponent(testMesh);
+	Test2.addComponent(testMesh2);
 
 	Test.Init();
+	Test2.Init();
 
 	Camera::moveForward(-7);
 	Camera::moveUp(2);
@@ -315,11 +322,13 @@ void Game::update() {
 
 	FPSCamera();
 	Test.Update();
+	Test2.Update();
 }
 
 void Game::render() {
 
 
 	Test.Render();
+	Test2.Render();
 
 }

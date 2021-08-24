@@ -4,6 +4,7 @@
 #include <string>
 #include <glm/glm.hpp>
 #include "Texture.h"
+#include "GameObject.h"
 
 class Mesh :
     public Component
@@ -32,6 +33,10 @@ public:
     void Update() override;
     void Render() override;
     int getID() override;
+    void setGameObject(void*) override;
+
+protected:
+    GameObject* Container;
 
 private:
 

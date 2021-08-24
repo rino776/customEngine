@@ -12,6 +12,11 @@ int Mesh::getID() {
 	return 1; //is there some way to dynamically allocate this?
 }
 
+void Mesh::setGameObject(void* container) {
+	Mesh::Container = (GameObject*)container;
+}
+
+
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Texture* texture){
 	this->vertices = vertices;
 	this->indices = indices;
@@ -72,6 +77,16 @@ void Mesh::Render() {
 	glm::mat4 model = glm::mat4(1.0);
 	glm::mat4 view = Camera::getTransform();
 	glm::mat4 projection = glm::perspective((float)glm::radians(45.0f), 800.0f / 600.0f, 0.01f, 100.0f);
+
+	glm::vec3 Position = Container->getPosition();
+	glm::vec3 Rotation = Container->getRotation();
+	glm::vec3 Scale = Container->getScale();
+
+	model = glm::translate(model, Position);
+	model = glm::rotate(model, glm::radians(Rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+	model = glm::rotate(model, glm::radians(Rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+	model = glm::rotate(model, glm::radians(Rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	model = glm::scale(model, Scale);
 
 	shader1->setMatrix("model", model);
 	shader1->setMatrix("view", view);
