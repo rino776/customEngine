@@ -41,7 +41,6 @@ unsigned int m_squareIndices[] = {
     1, 2, 3
 };
 
-
 float m_CubeVertices[] = {
        -0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,  
         0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,  

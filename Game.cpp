@@ -10,29 +10,26 @@
 #include "GameObject.h"
 #include "Mesh.h"
 #include "Texture.h"
+#include "Sprite.h"
 
 /*
 	TODO:
 		- entity component system (2D and 3D)
-			- game object
 			- behaviour
 			- collider
-			- mesh
-			- messaging/share data among components
+			- messaging/share data among components?
 
 		- text rendering
 			- multiple shaders/easy shader switching
-				-make that part of entity componant?
+				-make that part of entity component?
 		
-		- lights (put as gameobject componant?)
+		- lights (put as gameobject component?)
 			- put into own class
 			- attenuation
 		- model loading?
 		- mouse to world coords
 		- documentation
 		- config files
-
-
 
 */
 
@@ -240,6 +237,8 @@ std::vector<unsigned int> indices;
 Mesh* testMesh;
 Mesh* testMesh2;
 
+Sprite* testSprite;
+
 GameObject Test;
 GameObject Test2;
 
@@ -247,7 +246,7 @@ GameObject Test2;
 
 void Game::init() {
 
-	Test = GameObject(glm::vec3(1.0,1.0,1.0),glm::vec3(0.0, 0.0, 0.0), glm::vec3(1.0, 1.0, 1.0));
+	Test = GameObject(glm::vec3(400,300,0),glm::vec3(0.0, 0.0, 0.0), glm::vec3(100, 100, 100));
 
 	unsigned int index = 0;
 	int UV = 0;
@@ -269,9 +268,11 @@ void Game::init() {
 	testMesh = new Mesh(vertices, indices, tex);
 	testMesh2 = new Mesh(vertices, indices, tex);
 
+	testSprite = new Sprite(tex);
+
 	lastMouse = Input::getMousePos();
 
-	Test.addComponent(testMesh);
+	Test.addComponent(testSprite);
 	Test2.addComponent(testMesh2);
 
 	Test.Init();
@@ -326,7 +327,6 @@ void Game::update() {
 }
 
 void Game::render() {
-
 
 	Test.Render();
 	Test2.Render();

@@ -13,6 +13,7 @@ GLFWwindow* m_window;
 const unsigned int HEIGHT = 600;
 const unsigned int WIDTH = 800;
 const char* TITLE = "Some Title";
+bool showCursor = false;
 
 void error_callback(int error, const char* desc) {
 	fprintf(stderr, "Error: %s\n", desc);
@@ -22,7 +23,13 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 	Input::setKey(key, action);
 	//TODO: temporary (tm) should expose this somehow to the game...
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-		glfwSetWindowShouldClose(window, true);
+		showCursor = !showCursor;
+
+		if (showCursor) {
+			glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		} else {
+			glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		}
 	}
 }
 
