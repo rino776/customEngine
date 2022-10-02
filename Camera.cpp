@@ -29,8 +29,6 @@ void Camera::rotateCamera(glm::vec3 rot) {
 	m_Front.y = sin(glm::radians(pitch));
 	m_Front.z = -cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 
-
-
 }
 
 void Camera::moveCamera(glm::vec3 pos) {
